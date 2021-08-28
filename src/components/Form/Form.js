@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { addContact } from "../../redux/contacts/items/items-actions";
+// import { addContact } from "../../redux/contacts/items/items-actions";
+import { addContact } from "../../redux/contacts/items/items-operations";
 import { getFilterName } from "../../redux/contacts/items/items-selector";
 import Notification from "../Notification";
 import PropTypes from 'prop-types';
@@ -33,11 +34,12 @@ class Form extends Component {
   handleSubmit = e => {
     const { onSubmit } = this.props;
     const { contacts } = this.props;
+    const { name, number } = this.state;
     e.preventDefault();
     if (contacts.some(({ name }) => name.includes(this.state.name))) {
       this.setState({ alert: `${this.state.name} is already in your contacts book!` })
     } else {
-      onSubmit(this.state);
+      onSubmit({name, number});
     };
     this.reset();
   };

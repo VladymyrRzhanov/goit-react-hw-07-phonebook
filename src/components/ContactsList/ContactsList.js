@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import ContactListItem from './ContactListItem';
 import { connect } from "react-redux";
 import { getFilterName } from "../../redux/contacts/items/items-selector";
-import { deleteContact } from "../../redux/contacts/items/items-actions";
-// import s from './ContactListItem.module.css';
 import slice from "../../transition/slice.module.css";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {fetchContacts , deleteContact} from "../../redux/contacts/items/items-operations";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-// import { Slice } from "../../transition/slice";
-import {Container } from "./styles";
+import { Container } from "./styles";
 
-const ContactsList = ({ contacts, onDelete }) => (
+const ContactsList = ({ contacts, onDelete }) => {
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchContacts())
+  }, [dispatch]);
+
+  return (
   <Container>
     <TransitionGroup component='ul'>
     {contacts.map(({ id, name, number }) => (
@@ -28,7 +36,8 @@ const ContactsList = ({ contacts, onDelete }) => (
     ))}
   </TransitionGroup>
   </Container>
-);
+)
+};
 
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(
