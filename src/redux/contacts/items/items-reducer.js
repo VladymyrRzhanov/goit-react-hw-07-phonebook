@@ -1,15 +1,21 @@
-import * as contactsActions from "./items-actions";
+// import * as contactsActions from "./items-actions";
+import { fetchContacts, addContact, deleteContact } from './items-operations';
 import { createReducer } from '@reduxjs/toolkit';
 
 export const itemsReducer = createReducer([], {
-    [contactsActions.fetchContactsSuccess]: (_, { payload }) => payload,
+    [fetchContacts.fulfilled]: (_, { payload }) => payload,
     
-    [contactsActions.addContactSuccess]: ((state, { _, payload }) => [payload, ...state]),
+    [addContact.fulfilled]: ((state, { _, payload }) => [payload, ...state]),
     
-    [contactsActions.deleteContactSuccess]: (state, { _, payload }) => (state.filter(contact => contact.id !== payload))
+    [deleteContact.fulfilled]: (state, { _, payload }) => (state.filter(contact => contact.id !== payload))
 });
 
 export const errorReducer = createReducer(null, {
-    [contactsActions.fetchContactsError]: (_, { payload }) => payload,
-    [contactsActions.fetchContactsRequest]: () => null,
+    [fetchContacts.rejected]: (_, { payload }) => payload,
+    [addContact.rejected]: (_, { payload }) => payload,
+    [deleteContact.rejected]: (_, { payload }) => payload,
+    
+    [fetchContacts.pending]: () => null,
+    [addContact.pending]: () => null,
+    [deleteContact.pending]: () => null,
 })

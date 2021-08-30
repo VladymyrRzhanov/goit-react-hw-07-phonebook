@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getFilter } from "../../redux/contacts/filter/filter-selector";
-import { filterContacts } from "../../redux/contacts/filter/filter-actions";
+import { getFilter } from "redux/contacts/filter/filter-selector";
+import { filterContacts } from "redux/contacts/filter/filter-actions";
 import PropTypes from 'prop-types'
 // import s from "./Filter.module.css";
 import { Label, Title, Input } from "./styles";

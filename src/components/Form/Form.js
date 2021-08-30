@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 // import { addContact } from "../../redux/contacts/items/items-actions";
-import { addContact } from "../../redux/contacts/items/items-operations";
-import { getFilterName } from "../../redux/contacts/items/items-selector";
-import Notification from "../Notification";
+import { itemsOperations, itemsSelectors } from "redux/contacts/items";
+// import { getFilterName } from "redux/contacts/items/items-selector";
+import Notification from "components/Notification";
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import alertTransition from "../../transition/alert.module.css";
+import alertTransition from "transition/alert.module.css";
 import { CSSTransition } from 'react-transition-group';
-import { ReactComponent as AddIcon } from '../../images/accept.svg';
+import { ReactComponent as AddIcon } from 'images/accept.svg';
 // import s from './Form.module.css';
 import { ContactForm, InputContainer, Subtitle, Input, StyledInputMask, Button, BtnText } from "./styles";
 
@@ -103,11 +103,11 @@ class Form extends Component {
 };
 
 const mapStateToProps = state => ({
-  contacts: getFilterName(state)
+  contacts: itemsSelectors.getFilterName(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (contact) => dispatch(addContact(contact))
+  onSubmit: (contact) => dispatch(itemsOperations.addContact(contact))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

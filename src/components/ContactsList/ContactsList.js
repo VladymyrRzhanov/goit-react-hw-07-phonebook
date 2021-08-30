@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ContactListItem from './ContactListItem';
 import { connect } from "react-redux";
-import { getFilterName } from "../../redux/contacts/items/items-selector";
-import slice from "../../transition/slice.module.css";
+import { itemsSelectors, itemsOperations } from "redux/contacts/items";
+import slice from "transition/slice.module.css";
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import {fetchContacts , deleteContact} from "../../redux/contacts/items/items-operations";
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useDispatch } from 'react-redux';import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Container } from "./styles";
 
 const ContactsList = ({ contacts, onDelete }) => {
@@ -15,7 +13,7 @@ const ContactsList = ({ contacts, onDelete }) => {
 
 
   useEffect(() => {
-    dispatch(fetchContacts())
+    dispatch(itemsOperations.fetchContacts())
   }, [dispatch]);
 
   return (
@@ -48,11 +46,11 @@ ContactsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  contacts: getFilterName(state),
+  contacts: itemsSelectors.getFilterName(state),
 })
 
 const mapDispatchToProps = dispatch => ({
-  onDelete: id => dispatch(deleteContact(id))
+  onDelete: id => dispatch(itemsOperations.deleteContact(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);

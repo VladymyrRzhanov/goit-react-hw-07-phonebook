@@ -1,15 +1,14 @@
-import Form from '../Form';
-import Section from '../Section';
-import ContactsList from '../ContactsList';
-import Filter from '../Filter';
+import Form from 'components/Form';
+import Section from 'components/Section';
+import ContactsList from 'components/ContactsList';
+import Filter from 'components/Filter';
 import { connect } from "react-redux";
-import { getItems } from "../../redux/contacts/items/items-selector";
+import { itemsSelectors } from "redux/contacts/items";
 // import s from './App.module.css';
-import slide from "../../transition/slide.module.css";
-import pop from "../../transition/pop.module.css";
+import slide from "transition/slide.module.css";
+import pop from "transition/pop.module.css";
 import { CSSTransition } from 'react-transition-group';
 import { Title, Subtitle } from "./styles";
-
 
 const App = ({ contacts }) => {
   
@@ -52,7 +51,7 @@ const App = ({ contacts }) => {
 };
 
 const mapStateToProps = state => ({
-  contacts: getItems(state)
+  contacts: itemsSelectors.getItems(state)
 });
 
 export default connect(mapStateToProps)(App);
