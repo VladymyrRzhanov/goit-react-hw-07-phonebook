@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import s from './ContactListItem.module.css';
-import { Item, ItemContainer, Button, Data } from "./styles";
+import { ItemContainer, Button, Data } from "./styles";
 
 const ContactListItem = ({ onDelete, name, number }) => (
-  <Item>
+  
     <ItemContainer>
       <Button type="button" onClick={onDelete}>Delete X</Button>
       <Data>
@@ -12,7 +12,7 @@ const ContactListItem = ({ onDelete, name, number }) => (
         <span>{number}</span>
       </Data>
     </ItemContainer>
-  </Item>
+  
 );
 
 ContactListItem.propTypes = {

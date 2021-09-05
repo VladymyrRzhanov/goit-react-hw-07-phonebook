@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { itemsSelectors, itemsOperations } from "redux/contacts/items";
 import slice from "transition/slice.module.css";
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useDispatch } from 'react-redux';
+import { Transition, TransitionGroup } from 'react-transition-group';
+import Element from "../../transition/slice";
 import { Container } from "./styles";
 
 const ContactsList = ({ contacts, onDelete }) => {
@@ -17,24 +19,28 @@ const ContactsList = ({ contacts, onDelete }) => {
   }, [dispatch]);
 
   return (
-  <Container>
-    <TransitionGroup component='ul'>
-    {contacts.map(({ id, name, number }) => (
-      <CSSTransition
-        key={id}
-        timeout={250}
-        classNames={slice}
-        unmountOnExit>
-        <ContactListItem
-          name={name}
-          number={number}
-          onDelete={() => onDelete(id)}
-        />
-      </CSSTransition>
-    ))}
-  </TransitionGroup>
-  </Container>
-)
+    <Container>
+      <TransitionGroup component='ul'>
+        {contacts.map(({ id, name, number }) => (
+          <Transition
+            key={id}
+            timeout={250}
+            classNames={slice}
+            unmountOnExit>
+            {(state) => (
+              <Element state={state}>
+                <ContactListItem
+                  name={name}
+                  number={number}
+                  onDelete={() => onDelete(id)}
+                />
+              </Element>
+            )}
+          </Transition>
+        ))}
+      </TransitionGroup>
+    </Container>
+  );
 };
 
 ContactsList.propTypes = {

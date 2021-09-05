@@ -19,6 +19,7 @@ export const Item = styled.li`
 export const ItemContainer = styled.div`
   width: 70%;
   padding: 20px 50px;
+
 `;
 
 export const Data = styled.div`
@@ -62,11 +63,11 @@ export const Button = styled.button`
     transform: scale(1.2);
   }
 
-  &:hover ~ Data {
+  &:hover ~ ${Data} {
     transform: scale(1.1);
   }
 
-  &:hover ~ Data::before {
+  &:hover ~ ${Data}::before {
     transform: scaleX(1);
   }
 `;
